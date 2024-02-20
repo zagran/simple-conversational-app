@@ -1,0 +1,29 @@
+version: '1.0'
+
+services:
+
+  model-api:
+    container_name: model-api
+    environment:
+        - BUILD_COMMIT_SHA=local
+        - FLAVOR=local
+    build:
+      context: .
+      args:
+        - BUILD_COMMIT_SHA=local
+        - FLAVOR=local
+    restart: always
+    volumes:
+      - ./models:/models
+      - ./app:/app/app
+    ports:
+      - "8080:8000"
+    networks:
+      - db_network
+      - web_network
+
+networks:
+  db_network:
+    driver: bridge
+  web_network:
+    driver: bridge
