@@ -1,12 +1,10 @@
-from fastapi import FastAPI
-
 from langchain_community.llms import LlamaCpp
 
-app = FastAPI()
+from core.config import config
 
 llm = LlamaCpp(
     # model_path="/Users/zagran/workspace/simple-conversational-app/models/synthia-7b-v2.0-16k.Q2_K.gguf",
-    model_path="/models/synthia-7b-v2.0-16k.Q2_K.gguf",
+    model_path=config.LLM_MODEL_PATH,
     # max tokens the model can account for when processing a response
     # make it large enough for the question and answer
     n_ctx=4096,
@@ -19,17 +17,3 @@ llm = LlamaCpp(
     f16_kv=True,
     verbose=False,
 )
-
-
-@app.get("/{question}")
-async def root(question: str) -> dict:
-    output = llm.invoke(
-        question,
-        max_tokens=4096,
-        temperature=0.2,
-        # nucleus sampling (mass probability index)
-        # controls the cumulative probability of the generated tokens
-        # the higher top_p the more diversity in the output
-        top_p=0.1
-    )
-    return {"response": output}

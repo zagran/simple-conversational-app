@@ -12,6 +12,7 @@ fastapi = "^0.109.2"
 uvicorn = "^0.27.1"
 langchain = "^0.1.8"
 llama-cpp-python = "^0.2.44"
+pydantic-settings = "^2.2.1"
 
 
 [build-system]

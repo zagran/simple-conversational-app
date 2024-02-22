@@ -4,7 +4,7 @@ ARG APP_HOME=/app
 ARG BUILD_COMMIT_SHA
 
 # Use "fat" python image to build deps.
-FROM python:3.12.1 AS python-deps
+FROM python:3.12.2 AS python-deps
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
@@ -52,4 +52,4 @@ RUN chown -R ${USER}:${GROUP} /.venv
 WORKDIR $APP_HOME
 
 # gunicorn
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8000"]

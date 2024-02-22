@@ -16,6 +16,7 @@ services:
     volumes:
       - ./models:/models
       - ./app:/app/app
+      - ./core:/app/core
     ports:
       - "8080:8000"
     networks:
